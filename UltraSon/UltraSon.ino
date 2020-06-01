@@ -27,21 +27,10 @@ void loop() {
   Serial.print(" ");
   Dist=speedOfSound*pingTime/20000;
   Serial.println(Dist);
-  // tone(Buzzer,Dist*10+50);
   if (Dist<50){
 	  analogWrite(Buzzer, 190);
-	  /*
-	  if (Dist<=thresh){
-	    Serial.println("Stop"); // Bdl had lcode
-	  }
-	  else{
-	    Serial.println("Just Go"); //bdl had lcode
-	  }
-	  */
-
 	  delay(10+Dist*10);
 	  analogWrite(Buzzer, 0);
 	  delay(300);
   }
-  // noTone(Buzzer);
 }
