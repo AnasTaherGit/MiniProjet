@@ -1,8 +1,10 @@
-int trigPin=30;
-int echoPin=31;
+#define trigPin 5
+#define echoPin 6
+#define Buzzer  7
+
 float pingTime;
 float speedOfSound=343;
-float thresh=10;
+// float thresh=10;
 float Dist;
 
 void setup() {
@@ -10,23 +12,36 @@ void setup() {
   Serial.begin(9600);
   pinMode(trigPin,OUTPUT);
   pinMode(echoPin,INPUT);
+  pinMode(Buzzer,OUTPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
+
   digitalWrite(trigPin,HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin,LOW);
 
   pingTime=pulseIn(echoPin,HIGH);
-
+  Serial.print(pingTime);
+  Serial.print(" ");
   Dist=speedOfSound*pingTime/20000;
-  if (Dist<=thresh){
-    Serial.println("Stop"); // Bdl had lcode
+  Serial.println(Dist);
+  // tone(Buzzer,Dist*10+50);
+  if (Dist<50){
+	  analogWrite(Buzzer, 190);
+	  /*
+	  if (Dist<=thresh){
+	    Serial.println("Stop"); // Bdl had lcode
+	  }
+	  else{
+	    Serial.println("Just Go"); //bdl had lcode
+	  }
+	  */
+
+	  delay(10+Dist*10);
+	  analogWrite(Buzzer, 0);
+	  delay(300);
   }
-  else{
-    Serial.println("Just Go"); //bdl had lcode
-  }
-  delay(100);
+  // noTone(Buzzer);
 }
