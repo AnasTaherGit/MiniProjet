@@ -27,7 +27,7 @@ void loop() {
   Serial.print(" ");
   Dist=speedOfSound*pingTime/20000;
   Serial.println(Dist);
-  if (Dist<50){
+  if (Dist<100){
 	  analogWrite(Buzzer, 190);
 	  delay(10+Dist*10);
 	  analogWrite(Buzzer, 0);
